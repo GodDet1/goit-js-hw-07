@@ -3,7 +3,6 @@ import { galleryItems } from "./gallery-items.js";
 
 const galleryContainer = document.querySelector(".gallery");
 const body = document.querySelector("body");
-// console.log(galleryContainer);
 
 function renderGrid(gallery) {
   const renderStartGrid = gallery

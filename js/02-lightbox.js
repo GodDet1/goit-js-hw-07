@@ -1,11 +1,7 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-console.log(galleryItems);
-
 const galleryContainer = document.querySelector(".gallery");
-const body = document.querySelector("body");
-// console.log(galleryContainer);
 
 function renderGrid(gallery) {
   const renderStartGrid = gallery
