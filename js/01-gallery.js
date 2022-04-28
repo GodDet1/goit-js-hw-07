@@ -5,32 +5,36 @@ const galleryContainer = document.querySelector(".gallery");
 const body = document.querySelector("body");
 // console.log(galleryContainer);
 
-const renderStartGrid = galleryItems
-  .map(
-    (a) =>
-      `<div class="gallery__item">
+function renderGrid(gallery) {
+  const renderStartGrid = gallery
+    .map(
+      (item) =>
+        `<div class="gallery__item">
   <a class="gallery__link" href="">
     <img
       class="gallery__image"
-      src="${a.preview}"
-      data-source="${a.original}"
-      alt="${a.description}"
+      src="${item.preview}"
+      data-source="${item.original}"
+      alt="${item.description}"
     />
   </a>
 </div>`
-  )
-  .join("");
+    )
+    .join("");
 
-galleryContainer.insertAdjacentHTML("beforeend", renderStartGrid);
+  galleryContainer.insertAdjacentHTML("beforeend", renderStartGrid);
+}
 
-galleryContainer.addEventListener("click", (evt) => {
-  evt.preventDefault();
+renderGrid(galleryItems);
 
-  if (evt.target === evt.currentTarget) {
+galleryContainer.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  if (event.target === event.currentTarget) {
     return;
   }
 
-  const originalImageUrl = evt.target.getAttribute("data-source");
+  const originalImageUrl = event.target.getAttribute("data-source");
   const instance = basicLightbox.create(
     `<img width="1400" height="900" src="${originalImageUrl}">`
   );
@@ -38,7 +42,7 @@ galleryContainer.addEventListener("click", (evt) => {
 
   openModal();
 
-  body.addEventListener("keydown", closeModal);
+  // =======Escape key exit
 
   function closeModal(event) {
     if (event.code === "Escape") {
@@ -46,4 +50,6 @@ galleryContainer.addEventListener("click", (evt) => {
       body.removeEventListener("keydown", closeModal);
     }
   }
+
+  body.addEventListener("keydown", closeModal);
 });
